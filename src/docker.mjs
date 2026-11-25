@@ -116,6 +116,17 @@ export function redactAssignment(entry) {
   return `${key}=${redactUrlCredentials(text.slice(eq + 1))}`;
 }
 
+// Command arguments: also hides the value after a secret-like flag ("--requirepass hunter2").
+export function redactArgs(args) {
+  if (!Array.isArray(args)) return [];
+  return args.map((arg, i) => {
+    const prev = i > 0 ? String(args[i - 1]) : '';
+    const isSecretFlag = /^--?[^=]+$/.test(prev) && SECRET_KEY_RE.test(prev);
+    if (isSecretFlag && !String(arg).startsWith('-')) return REDACTED;
+    return redactAssignment(arg);
+  });
+}
+
 export function redactEnvList(envArray) {
   if (!Array.isArray(envArray)) return [];
   return envArray.map(redactAssignment);

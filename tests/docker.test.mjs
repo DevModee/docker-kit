@@ -11,6 +11,7 @@ import {
   createDockerClient,
   mergeLogStreams,
   parseJsonLines,
+  redactArgs,
   redactAssignment,
   redactEnvList,
   stripAnsi,
@@ -121,6 +122,19 @@ describe('secret redaction', () => {
     assert.equal(redactAssignment('--password=topsecret'), '--password=[REDACTED]');
     assert.equal(redactAssignment('server.js'), 'server.js');
     assert.deepEqual(redactEnvList(null), []);
+  });
+
+  test('redacts the value that follows a secret-like flag', () => {
+    assert.deepEqual(redactArgs(['redis-server', '--requirepass', 'hunter2', '--port', '6379']), [
+      'redis-server',
+      '--requirepass',
+      '[REDACTED]',
+      '--port',
+      '6379',
+    ]);
+    assert.deepEqual(redactArgs(['app', '-p', 'x', '--token', '--verbose']), ['app', '-p', 'x', '--token', '--verbose']);
+    assert.deepEqual(redactArgs(['app', '--db-password=hunter2']), ['app', '--db-password=[REDACTED]']);
+    assert.deepEqual(redactArgs(null), []);
   });
 });
 

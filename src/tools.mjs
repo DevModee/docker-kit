@@ -5,7 +5,7 @@ import {
   DockerError,
   WRITE_TIMEOUT_MS,
   mergeLogStreams,
-  redactAssignment,
+  redactArgs,
   redactEnvList,
   stripAnsi,
   truncateText,
@@ -185,7 +185,7 @@ export function summarizeContainer(data, { includeEnv = true } = {}) {
   const host = data.HostConfig || {};
   const net = data.NetworkSettings || {};
   const labels = config.Labels || {};
-  const command = [data.Path, ...(Array.isArray(data.Args) ? data.Args : [])].filter(Boolean).map(redactAssignment);
+  const command = redactArgs([data.Path, ...(Array.isArray(data.Args) ? data.Args : [])].filter(Boolean));
 
   const summary = {
     id: String(data.Id || '').slice(0, 12),
