@@ -1,0 +1,28 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "docker-kit",
+  "displayName": "Docker Kit",
+  "version": "1.0.0",
+  "description": "Docker workflow plugin for Antigravity: zero-dependency MCP server for containers, logs, stats, Compose, images, and networks, plus triage skills and destructive-command safety hooks.",
+  "logo": "assets/logo.svg",
+  "author": {
+    "name": "Matias Sanchez Gonzalez",
+    "url": "https://github.com/DevModee"
+  },
+  "homepage": "https://github.com/DevModee/docker-kit",
+  "repository": "https://github.com/DevModee/docker-kit",
+  "license": "MIT",
+  "keywords": [
+    "docker",
+    "docker-compose",
+    "containers",
+    "devops",
+    "linux",
+    "mcp"
+  ],
+  "suggestedPrompts": [
+    "Inspect all running and recently exited containers and diagnose any failures",
+    "Check logs and resource stats for the container using the most memory",
+    "Audit the Dockerfile in this workspace for image size, caching, and security issues"
+  ]
+}
