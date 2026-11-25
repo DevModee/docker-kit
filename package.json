@@ -1,0 +1,17 @@
+{
+  "name": "docker-kit",
+  "version": "1.0.0",
+  "description": "Docker plugin for Google Antigravity with a zero-dependency MCP server, triage skills, and destructive-command safety hooks.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "author": "Matias Sanchez Gonzalez <https://github.com/DevModee>",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test",
+    "lint": "node scripts/lint.mjs"
+  }
+}
